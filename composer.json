@@ -1,0 +1,32 @@
+{
+
+    "name": "dot/pages",
+
+    "description": "The pages module of dot/cms",
+
+    "keywords": ["dotcms", "framework", "laravel", "cms", "modules", "plugins"],
+
+    "license": "MIT",
+
+    "type": "package",
+
+    "require": {
+        "dot/platform": "*",
+        "dot/media": "*",
+        "dot/users": "*",
+        "dot/tags": "*",
+        "dot/auth": "*"
+    },
+
+    "autoload": {
+        "psr-4": {
+            "Dot\\Pages\\": "src"
+        }
+    },
+
+    "config": {
+        "preferred-install": "dist"
+    },
+
+    "minimum-stability" : "dev"
+}
