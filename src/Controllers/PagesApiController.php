@@ -2,15 +2,14 @@
 
 namespace Dot\Pages\Controllers;
 
-use Illuminate\Http\Request;
-use Dot\ApiController;
 use Dot\Pages\Models\Page;
-
+use Dot\Platform\APIController;
+use Illuminate\Http\Request;
 
 /**
  * Class PagesApiController
  */
-class PagesApiController extends ApiController
+class PagesApiController extends APIController
 {
 
     /**
@@ -45,8 +44,8 @@ class PagesApiController extends ApiController
 
         $components = $request->get("with", []);
 
-        foreach($components as $relation => $data){
-            $components[$relation] = function($query) use ($data){
+        foreach ($components as $relation => $data) {
+            $components[$relation] = function ($query) use ($data) {
                 return $query->orderBy(array_get($data, 'order_by', "id"), array_get($data, 'order_direction', "DESC"));
             };
         }

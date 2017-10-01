@@ -2,7 +2,7 @@
 
 namespace Dot\Pages\Models;
 
-use Dot\Model;
+use Dot\Platform\Model;
 
 class PageTag extends Model {
     

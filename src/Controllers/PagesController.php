@@ -2,13 +2,13 @@
 
 namespace Dot\Pages\Controllers;
 
-use Request;
-use View;
 use Action;
-use Redirect;
 use Dot\Auth\Models\Auth;
 use Dot\Pages\Models\Page;
-use Dot\Controller;
+use Dot\Platform\Controller;
+use Redirect;
+use Request;
+use View;
 
 class PagesController extends Controller
 {
@@ -108,7 +108,6 @@ class PagesController extends Controller
 
     public function edit($id)
     {
-
 
 
         $page = Page::findOrFail($id);

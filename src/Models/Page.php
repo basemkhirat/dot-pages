@@ -2,11 +2,11 @@
 
 namespace Dot\Pages\Models;
 
-use PageScope;
-use Dot\Model;
 use Dot\Media\Models\Media;
-use Dot\Users\Models\User;
+use Dot\Platform\Model;
 use Dot\Tags\Models\Tag;
+use Dot\Users\Models\User;
+use Dot\Pages\Scopes\Page as PageScope;
 
 class Page extends Model
 {

@@ -2,12 +2,11 @@
 
 namespace Dot\Pages;
 
-use Plugin;
-use Navigation;
 use Gate;
+use Navigation;
 use URL;
 
-class PagesPlugin extends Plugin
+class Plugin extends \Dot\Platform\Plugin
 {
 
     public $permissions = [
