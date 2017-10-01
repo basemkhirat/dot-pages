@@ -13,19 +13,6 @@ class Plugin extends \Dot\Platform\Plugin
         "manage"
     ];
 
-    /**
-     * @return array
-     */
-    function info()
-    {
-
-        return [
-            "name" => "pages",
-            "version" => "1.0",
-        ];
-
-    }
-
     function boot()
     {
         Navigation::menu("sidebar", function ($menu) {
