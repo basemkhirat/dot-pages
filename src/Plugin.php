@@ -15,6 +15,7 @@ class Plugin extends \Dot\Platform\Plugin
 
     function boot()
     {
+
         Navigation::menu("sidebar", function ($menu) {
             if (Gate::allows("pages.manage")) {
                 $menu->item('pages', trans("admin::common.pages"), URL::to(ADMIN . '/pages'))
