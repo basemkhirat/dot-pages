@@ -6,15 +6,17 @@ use Gate;
 use Navigation;
 use URL;
 
-class Plugin extends \Dot\Platform\Plugin
+class Pages extends \Dot\Platform\Plugin
 {
 
-    public $permissions = [
+    protected $permissions = [
         "manage"
     ];
 
     function boot()
     {
+
+        parent::boot();
 
         Navigation::menu("sidebar", function ($menu) {
             if (Gate::allows("pages.manage")) {
@@ -23,8 +25,5 @@ class Plugin extends \Dot\Platform\Plugin
                     ->icon("fa-file-text-o");
             }
         });
-
-        include __DIR__ . "/routes.php";
-
     }
 }
