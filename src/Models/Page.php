@@ -8,45 +8,87 @@ use Dot\Tags\Models\Tag;
 use Dot\Users\Models\User;
 use Dot\Pages\Scopes\Page as PageScope;
 
+/**
+ * Class Page
+ * @package Dot\Pages\Models
+ */
 class Page extends Model
 {
 
-    protected $module = 'pages';
-
+    /**
+     * @var string
+     */
     protected $table = 'pages';
+    /**
+     * @var string
+     */
     protected $primaryKey = 'id';
+    /**
+     * @var bool
+     */
     public $timestamps = true;
 
+    /**
+     * @var array
+     */
     protected $searchable = ['title', 'excerpt', 'content'];
+    /**
+     * @var int
+     */
     protected $perPage = 20;
 
+    /**
+     * @var array
+     */
     protected $sluggable = [
         'slug' => 'title',
     ];
 
+    /**
+     * @var array
+     */
     protected $creatingRules = [
         'title' => 'required'
     ];
 
+    /**
+     * @var array
+     */
     protected $updatingRules = [
         'title' => 'required'
     ];
 
+    /**
+     * Image relation
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
     public function image()
     {
         return $this->hasOne(Media::class, "id", "image_id");
     }
 
+    /**
+     * User relation
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
     public function user()
     {
         return $this->hasOne(User::class, "id", "user_id");
     }
 
+    /**
+     * Tags relation
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
     public function tags()
     {
         return $this->belongsToMany(Tag::class, "pages_tags", "page_id", "tag_id");
     }
 
+    /**
+     * Sync tags
+     * @param $tags
+     */
     public function syncTags($tags)
     {
         $tag_ids = array();

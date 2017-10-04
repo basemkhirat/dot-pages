@@ -2,7 +2,7 @@
 
 namespace Dot\Pages;
 
-use Gate;
+use Illuminate\Support\Facades\Auth;
 use Navigation;
 use URL;
 
@@ -19,7 +19,8 @@ class Pages extends \Dot\Platform\Plugin
         parent::boot();
 
         Navigation::menu("sidebar", function ($menu) {
-            if (Gate::allows("pages.manage")) {
+
+            if (Auth::user()->can("pages.manage")) {
                 $menu->item('pages', trans("admin::common.pages"), URL::to(ADMIN . '/pages'))
                     ->order(5.5)
                     ->icon("fa-file-text-o");
