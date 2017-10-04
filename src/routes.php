@@ -5,7 +5,7 @@
  */
 Route::group(array(
     "prefix" => ADMIN,
-    "middleware" => ["web", "auth"],
+    "middleware" => ["web", "auth", "can:pages.manage"],
         ), function($route) {
     $route->group(array("prefix" => "pages"), function($route) {
         $route->any('/', array("as" => "admin.pages.show", "uses" => "Dot\Pages\Controllers\PagesController@index"));

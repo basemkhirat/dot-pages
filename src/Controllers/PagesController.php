@@ -10,20 +10,26 @@ use Redirect;
 use Request;
 use View;
 
+/**
+ * Class PagesController
+ * @package Dot\Pages\Controllers
+ */
 class PagesController extends Controller
 {
 
+    /**
+     * View payload
+     * @var array
+     */
     protected $data = [];
 
-    function __construct()
-    {
-        parent::__construct();
-        $this->middleware("permission:pages.manage");
-
-    }
-
+    /**
+     * Show all pages
+     * @return mixed
+     */
     function index()
     {
+
         if (Request::isMethod("post")) {
             if (Request::has("action")) {
                 switch (Request::get("action")) {
@@ -57,19 +63,26 @@ class PagesController extends Controller
         if (Request::has("status")) {
             $query->where("status", Request::get("status"));
         }
+
         if (Request::has("q")) {
             $query->search(urldecode(Request::get("q")));
         }
+
         $this->data["pages"] = $query->paginate($this->data['per_page']);
 
         return View::make("pages::show", $this->data);
     }
 
+    /**
+     * Create a new page
+     * @return mixed
+     */
     public function create()
     {
-        $page = new Page();
-        if (Request::isMethod("post")) {
 
+        $page = new Page();
+
+        if (Request::isMethod("post")) {
 
             $page->title = Request::get('title');
             $page->slug = Request::get('slug');
@@ -80,8 +93,8 @@ class PagesController extends Controller
             $page->status = Request::get("status", 0);
             $page->lang = app()->getLocale();
 
+            // Fire saving action
 
-            // fire page saving action
             Action::fire("page.saving", $page);
 
             if (!$page->validate()) {
@@ -89,16 +102,15 @@ class PagesController extends Controller
             }
 
             $page->save();
-
             $page->syncTags(Request::get("tags"));
 
-            // fire  saved action
+            // Fire saved action
+
             Action::fire("page.saved", $page);
 
             return Redirect::route("admin.pages.edit", array("id" => $page->id))
                 ->with("message", trans("pages::pages.events.created"));
         }
-
 
         $this->data["page_tags"] = array();
         $this->data["page"] = $page;
@@ -106,12 +118,15 @@ class PagesController extends Controller
         return View::make("pages::edit", $this->data);
     }
 
+    /**
+     * Edit page by id
+     * @param $id
+     * @return mixed
+     */
     public function edit($id)
     {
 
-
         $page = Page::findOrFail($id);
-
 
         if (Request::isMethod("post")) {
 
@@ -123,7 +138,8 @@ class PagesController extends Controller
             $page->status = Request::get("status", 0);
             $page->lang = app()->getLocale();
 
-            // fire page saving action
+            // Fire saving action
+
             Action::fire("page.saving", $page);
 
             if (!$page->validate()) {
@@ -133,57 +149,72 @@ class PagesController extends Controller
             $page->save();
             $page->syncTags(Request::get("tags"));
 
-            // fire page saved action
+            // Fire saved action
+
             Action::fire("page.saved", $page);
 
             return Redirect::route("admin.pages.edit", array("id" => $id))->with("message", trans("pages::pages.events.updated"));
         }
 
-
         $this->data["page_tags"] = $page->tags->pluck("name")->toArray();
-
         $this->data["page"] = $page;
 
         return View::make("pages::edit", $this->data);
     }
 
+    /**
+     * Delete page by id
+     * @return mixed
+     */
     public function delete()
     {
         $ids = Request::get("id");
-        if (!is_array($ids)) {
-            $ids = array($ids);
-        }
+
+        $ids = is_array($ids) ? $ids : [$ids];
+
         foreach ($ids as $ID) {
+
             $page = Page::findOrFail($ID);
 
-            // fire page deleting action
+            // Fire deleting action
+
             Action::fire("page.deleting", $page);
 
             $page->tags()->detach();
             $page->delete();
 
-            // fire page deleted action
+            // Fire deleted action
+
             Action::fire("page.deleted", $page);
         }
+
         return Redirect::back()->with("message", trans("pages::pages.events.deleted"));
     }
 
+    /**
+     * Activating / Deactivating page by id
+     * @param $status
+     * @return mixed
+     */
     public function status($status)
     {
         $ids = Request::get("id");
-        if (!is_array($ids)) {
-            $ids = array($ids);
-        }
+
+        $ids = is_array($ids) ? $ids : [$ids];
+
         foreach ($ids as $id) {
+
             $page = Page::findOrFail($id);
 
-            // fire page saving action
+            // Fire saving action
+
             Action::fire("page.saving", $page);
 
             $page->status = $status;
             $page->save();
 
-            // fire page saved action
+            // Fire saved action
+
             Action::fire("page.saved", $page);
         }
 
@@ -192,6 +223,7 @@ class PagesController extends Controller
         } else {
             $message = trans("pages::pages.events.deactivated");
         }
+
         return Redirect::back()->with("message", $message);
     }
 
