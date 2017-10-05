@@ -2,7 +2,7 @@
 
 @section("content")
 
-    <form action="" method="post">
+    <form method="post">
 
         <div class="row wrapper border-bottom white-bg page-heading">
             <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
@@ -147,10 +147,7 @@
         var baseURL = '{!! URL::to("/".ADMIN) !!}/';
         var postURL = '{!! URL::to(' / details / ') !!}/{!!$page->slug!!}';
         var baseURL2 = '{!! URL::to("") !!}/';
-        var assetsURL = '{!! assets("") !!}/';
         var post_id = "{!!$page->id!!}";
-        var mongo_id = false;
-        var AMAZON_URL = "{!!AMAZON_URL!!}";
 
         $(document).ready(function () {
 
@@ -243,7 +240,6 @@
                     success: function (res) {
                         $("#slug_name").html(res);
                         $("#editable-post-name-full").html(res);
-                        //$("#wpseosnippet_slug").html(res);
                         $("#new-post-slug").val(res).hide();
                         $('#permalink_ok').hide();
                         $('#permalink_cancel').hide();
