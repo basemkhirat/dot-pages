@@ -12,10 +12,10 @@
 
     "require": {
         "dot/platform": "0.4.*",
-        "dot/media": "*",
-        "dot/users": "*",
-        "dot/tags": "*",
-        "dot/auth": "*"
+        "dot/media": "dev-master",
+        "dot/users": "dev-master",
+        "dot/tags": "dev-master",
+        "dot/auth": "dev-master"
     },
 
     "autoload": {
