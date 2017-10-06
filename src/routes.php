@@ -3,17 +3,18 @@
 /*
  * WEB
  */
-Route::group(array(
+Route::group([
     "prefix" => ADMIN,
-    "middleware" => ["web", "auth", "can:pages.manage"],
-        ), function($route) {
-    $route->group(array("prefix" => "pages"), function($route) {
-        $route->any('/', array("as" => "admin.pages.show", "uses" => "Dot\Pages\Controllers\PagesController@index"));
-        $route->any('/create', array("as" => "admin.pages.create", "uses" => "Dot\Pages\Controllers\PagesController@create"));
-        $route->any('/{id}/edit', array("as" => "admin.pages.edit", "uses" => "Dot\Pages\Controllers\PagesController@edit"));
-        $route->any('/delete', array("as" => "admin.pages.delete", "uses" => "Dot\Pages\Controllers\PagesController@delete"));
-        $route->any('/{status}/status', array("as" => "admin.pages.status", "uses" => "Dot\Pages\Controllers\PagesController@status"));
-        $route->post('newSlug', 'Dot\Pages\Controllers\PagesController@new_slug');
+    "middleware" => ["web", "auth:backend", "can:pages.manage"],
+    "namespace" => "Dot\\Pages\\Controllers"
+], function ($route) {
+    $route->group(["prefix" => "pages"], function ($route) {
+        $route->any('/', ["as" => "admin.pages.show", "uses" => "PagesController@index"]);
+        $route->any('/create', ["as" => "admin.pages.create", "uses" => "PagesController@create"]);
+        $route->any('/{id}/edit', ["as" => "admin.pages.edit", "uses" => "PagesController@edit"]);
+        $route->any('/delete', ["as" => "admin.pages.delete", "uses" => "PagesController@delete"]);
+        $route->any('/{status}/status', ["as" => "admin.pages.status", "uses" => "PagesController@status"]);
+        $route->post('newSlug', 'PagesController@new_slug');
     });
 });
 
@@ -22,12 +23,13 @@ Route::group(array(
  */
 Route::group([
     "prefix" => API,
-    "middleware" => ["auth:api"]
+    "middleware" => ["auth:api"],
+    "namespace" => "Dot\\Pages\\Controllers"
 ], function ($route) {
-    $route->get("/pages/show", "Dot\Pages\Controllers\PagesApiController@show");
-    $route->post("/pages/create", "Dot\Pages\Controllers\PagesApiController@create");
-    $route->post("/pages/update", "Dot\Pages\Controllers\PagesApiController@update");
-    $route->post("/pages/destroy", "Dot\Pages\Controllers\PagesApiController@destroy");
+    $route->get("/pages/show", "PagesApiController@show");
+    $route->post("/pages/create", "PagesApiController@create");
+    $route->post("/pages/update", "PagesApiController@update");
+    $route->post("/pages/destroy", "PagesApiController@destroy");
 });
 
 
