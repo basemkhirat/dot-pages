@@ -144,9 +144,9 @@
     <script type="text/javascript" src="{{ assets("admin::tagit") }}/tag-it.js"></script>
     <script type="text/javascript" src="{{ assets('admin::ckeditor/ckeditor.js') }}"></script>
     <script>
-        var baseURL = '{!! URL::to("/".ADMIN) !!}/';
-        var postURL = '{!! URL::to(' / details / ') !!}/{!!$page->slug!!}';
-        var baseURL2 = '{!! URL::to("") !!}/';
+        var baseURL = '{!! admin_url() !!}/';
+        var postURL = '{!! url(' / details / ') !!}/{!!$page->slug!!}';
+        var baseURL2 = '{!! url("") !!}/';
         var post_id = "{!!$page->id!!}";
 
         $(document).ready(function () {
