@@ -21,7 +21,7 @@ class Pages extends \Dot\Platform\Plugin
         Navigation::menu("sidebar", function ($menu) {
 
             if (Auth::user()->can("pages.manage")) {
-                $menu->item('pages', trans("admin::common.pages"), URL::to(ADMIN . '/pages'))
+                $menu->item('pages', trans("admin::common.pages"), route("admin.pages.show"))
                     ->order(5.5)
                     ->icon("fa-file-text-o");
             }
