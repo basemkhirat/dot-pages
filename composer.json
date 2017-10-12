@@ -22,11 +22,5 @@
         "psr-4": {
             "Dot\\Pages\\": "src"
         }
-    },
-
-    "config": {
-        "preferred-install": "dist"
-    },
-
-    "minimum-stability" : "dev"
+    }
 }
