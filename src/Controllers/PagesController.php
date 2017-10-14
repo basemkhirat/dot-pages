@@ -31,7 +31,7 @@ class PagesController extends Controller
     {
 
         if (Request::isMethod("post")) {
-            if (Request::has("action")) {
+            if (Request::filled("action")) {
                 switch (Request::get("action")) {
                     case "delete":
                         return $this->delete();
@@ -43,28 +43,28 @@ class PagesController extends Controller
             }
         }
 
-        $this->data["sort"] = (Request::has("sort")) ? Request::get("sort") : "created_at";
-        $this->data["order"] = (Request::has("order")) ? Request::get("order") : "DESC";
-        $this->data['per_page'] = (Request::has("per_page")) ? Request::get("per_page") : NULL;
+        $this->data["sort"] = (Request::filled("sort")) ? Request::get("sort") : "created_at";
+        $this->data["order"] = (Request::filled("order")) ? Request::get("order") : "DESC";
+        $this->data['per_page'] = (Request::filled("per_page")) ? Request::get("per_page") : NULL;
 
         $query = Page::with('image', 'user', 'tags')->orderBy($this->data["sort"], $this->data["order"]);
 
-        if (Request::has("tag_id")) {
+        if (Request::filled("tag_id")) {
             $query->whereHas("tags", function ($query) {
                 $query->where("tags.id", Request::get("tag_id"));
             });
         }
 
-        if (Request::has("user_id")) {
+        if (Request::filled("user_id")) {
             $query->whereHas("user", function ($query) {
                 $query->where("users.id", Request::get("user_id"));
             });
         }
-        if (Request::has("status")) {
+        if (Request::filled("status")) {
             $query->where("status", Request::get("status"));
         }
 
-        if (Request::has("q")) {
+        if (Request::filled("q")) {
             $query->search(urldecode(Request::get("q")));
         }
 

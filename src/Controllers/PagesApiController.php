@@ -52,11 +52,11 @@ class PagesApiController extends APIController
 
         $query = Page::with($components)->orderBy($sort_by, $sort_direction);
 
-        if ($request->has("q")) {
+        if ($request->filled("q")) {
             $query->search($request->get("q"));
         }
 
-        if ($request->has("status")) {
+        if ($request->filled("status")) {
             $query->where("status", $request->get("status"));
         }
 
@@ -111,10 +111,10 @@ class PagesApiController extends APIController
         if ($page->save()) {
 
             // Saving tags
-            if ($request->has("tag_ids")) {
+            if ($request->filled("tag_ids")) {
                 $tags = $request->get("tag_ids", []);
                 $page->tags()->sync($tags);
-            } elseif ($request->has("tag_names")) {
+            } elseif ($request->filled("tag_names")) {
                 $tags = Tag::saveNames($request->get("tag_names"));
                 $page->tags()->sync($tags);
             }
