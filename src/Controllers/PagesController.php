@@ -74,6 +74,71 @@ class PagesController extends Controller
     }
 
     /**
+     * Delete page by id
+     * @return mixed
+     */
+    public function delete()
+    {
+        $ids = Request::get("id");
+
+        $ids = is_array($ids) ? $ids : [$ids];
+
+        foreach ($ids as $ID) {
+
+            $page = Page::findOrFail($ID);
+
+            // Fire deleting action
+
+            Action::fire("page.deleting", $page);
+
+            $page->tags()->detach();
+            $page->delete();
+
+            // Fire deleted action
+
+            Action::fire("page.deleted", $page);
+        }
+
+        return Redirect::back()->with("message", trans("pages::pages.events.deleted"));
+    }
+
+    /**
+     * Activating / Deactivating page by id
+     * @param $status
+     * @return mixed
+     */
+    public function status($status)
+    {
+        $ids = Request::get("id");
+
+        $ids = is_array($ids) ? $ids : [$ids];
+
+        foreach ($ids as $id) {
+
+            $page = Page::findOrFail($id);
+
+            // Fire saving action
+
+            Action::fire("page.saving", $page);
+
+            $page->status = $status;
+            $page->save();
+
+            // Fire saved action
+
+            Action::fire("page.saved", $page);
+        }
+
+        if ($status) {
+            $message = trans("pages::pages.events.activated");
+        } else {
+            $message = trans("pages::pages.events.deactivated");
+        }
+
+        return Redirect::back()->with("message", $message);
+    }
+
+    /**
      * Create a new page
      * @return mixed
      */
@@ -160,71 +225,6 @@ class PagesController extends Controller
         $this->data["page"] = $page;
 
         return View::make("pages::edit", $this->data);
-    }
-
-    /**
-     * Delete page by id
-     * @return mixed
-     */
-    public function delete()
-    {
-        $ids = Request::get("id");
-
-        $ids = is_array($ids) ? $ids : [$ids];
-
-        foreach ($ids as $ID) {
-
-            $page = Page::findOrFail($ID);
-
-            // Fire deleting action
-
-            Action::fire("page.deleting", $page);
-
-            $page->tags()->detach();
-            $page->delete();
-
-            // Fire deleted action
-
-            Action::fire("page.deleted", $page);
-        }
-
-        return Redirect::back()->with("message", trans("pages::pages.events.deleted"));
-    }
-
-    /**
-     * Activating / Deactivating page by id
-     * @param $status
-     * @return mixed
-     */
-    public function status($status)
-    {
-        $ids = Request::get("id");
-
-        $ids = is_array($ids) ? $ids : [$ids];
-
-        foreach ($ids as $id) {
-
-            $page = Page::findOrFail($id);
-
-            // Fire saving action
-
-            Action::fire("page.saving", $page);
-
-            $page->status = $status;
-            $page->save();
-
-            // Fire saved action
-
-            Action::fire("page.saved", $page);
-        }
-
-        if ($status) {
-            $message = trans("pages::pages.events.activated");
-        } else {
-            $message = trans("pages::pages.events.deactivated");
-        }
-
-        return Redirect::back()->with("message", $message);
     }
 
 }

@@ -98,136 +98,136 @@
                     </div>
                     <div class="ibox-content">
                         @if (count($pages))
-                        <div class="row">
-                            <div class="col-lg-3 col-md-4 col-sm-12 col-xs-12 action-box">
+                            <div class="row">
+                                <div class="col-lg-3 col-md-4 col-sm-12 col-xs-12 action-box">
 
-                                <select name="action" class="form-control pull-left">
-                                    <option value="-1"
-                                            selected="selected">{{ trans("pages::pages.bulk_actions") }}</option>
-                                    <option value="delete">{{ trans("pages::pages.delete") }}</option>
-                                    <option value="activate">{{ trans("pages::pages.activate") }}</option>
-                                    <option value="deactivate">{{ trans("pages::pages.deactivate") }}</option>
-                                </select>
+                                    <select name="action" class="form-control pull-left">
+                                        <option value="-1"
+                                                selected="selected">{{ trans("pages::pages.bulk_actions") }}</option>
+                                        <option value="delete">{{ trans("pages::pages.delete") }}</option>
+                                        <option value="activate">{{ trans("pages::pages.activate") }}</option>
+                                        <option value="deactivate">{{ trans("pages::pages.deactivate") }}</option>
+                                    </select>
 
-                                <button type="submit"
-                                        class="btn btn-primary pull-right">{{ trans("pages::pages.apply") }}</button>
+                                    <button type="submit"
+                                            class="btn btn-primary pull-right">{{ trans("pages::pages.apply") }}</button>
 
-                            </div>
+                                </div>
 
-                            <div class="col-lg-6 col-md-4 hidden-sm hidden-xs"></div>
+                                <div class="col-lg-6 col-md-4 hidden-sm hidden-xs"></div>
 
-                            <div class="col-lg-3 col-md-4 col-sm-12 col-xs-12">
+                                <div class="col-lg-3 col-md-4 col-sm-12 col-xs-12">
 
-                                <select class="form-control per_page_filter">
-                                    <option value="" selected="selected">
-                                        -- {{ trans("pages::pages.per_page") }} --
-                                    </option>
-                                    @foreach (array(10, 20, 30, 40) as $num) { }}
-                                    <option
-                                        value="{{ $num }}"
-                                        @if ($num == $per_page) selected="selected" @endif>{{ $num }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        <div class="table-responsive">
-                            <table cellpadding="0" cellspacing="0" border="0" class="table table-striped">
-                                <thead>
-                                <tr>
-                                    <th style="width:35px"><input type="checkbox" class="i-checks check_all"
-                                                                  name="ids[]"/>
-                                    </th>
-                                    <th>{{ trans("pages::pages.attributes.title") }}</th>
-                                    <th>{{ trans("pages::pages.attributes.created_at") }}</th>
-                                    <th>{{ trans("pages::pages.user") }}</th>
-                                    <th>{{ trans("pages::pages.tags") }}</th>
-                                    <th>{{ trans("pages::pages.attributes.status") }}</th>
-                                    <th>{{ trans("pages::pages.actions") }}</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                @foreach ($pages as $page)
-                                <tr>
-                                    <td>
-                                        <input type="checkbox" class="i-checks" name="id[]"
-                                               value="{{ $page->id }}"/>
-                                    </td>
-
-                                    <td>
-                                        <a data-toggle="tooltip" data-placement="bottom"
-                                           title="{{ trans("pages::pages.edit") }}" class="text-navy"
-                                           href="{{ route("admin.pages.edit", array("id" => $page->id)) }}">
-                                            <strong>{{ $page->title }}</strong>
-                                        </a>
-
-                                    </td>
-                                    <td>
-                                        <small>{{ $page->created_at->render() }}</small>
-                                    </td>
-                                    <td>
-                                        <a href="?user_id={{ @$page->user->id }}" class="text-navy">
-                                            <small> {{ @$page->user->first_name }}</small>
-                                        </a>
-                                    </td>
-
-                                    <td>
-                                        @if(count($page->tags))
-                                        @foreach ($page->tags as $tag)
-                                        <a href="?tag_id={{ $tag->id }}" class="text-navy">
-                                            <span class="badge badge-primary">{{ $tag->name }}</span>
-                                        </a>
+                                    <select class="form-control per_page_filter">
+                                        <option value="" selected="selected">
+                                            -- {{ trans("pages::pages.per_page") }} --
+                                        </option>
+                                        @foreach (array(10, 20, 30, 40) as $num) { }}
+                                        <option
+                                            value="{{ $num }}"
+                                            @if ($num == $per_page) selected="selected" @endif>{{ $num }}</option>
                                         @endforeach
-                                        @else
-                                        -
-                                        @endif
-                                    </td>
-                                    <td>
-                                        @if ($page->status)
-                                        <a data-toggle="tooltip" data-placement="bottom"
-                                           title="{{ trans("pages::pages.activated") }}" class="ask"
-                                           message="{{ trans('pages::pages.sure_deactivate') }}"
-                                           href="{{ URL::route("admin.pages.status", array("id" => $page->id, "status" => 0)) }}">
-                                            <i class="fa fa-toggle-on text-success"></i>
-                                        </a>
-                                        @else
-                                        <a data-toggle="tooltip" data-placement="bottom"
-                                           title="{{ trans("pages::pages.deactivated") }}" class="ask"
-                                           message="{{ trans('pages::pages.sure_activate') }}"
-                                           href="{{ URL::route("admin.pages.status", array("id" => $page->id, "status" => 1)) }}">
-                                            <i class="fa fa-toggle-off text-danger"></i>
-                                        </a>
-                                        @endif
-                                    </td>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="table-responsive">
+                                <table cellpadding="0" cellspacing="0" border="0" class="table table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th style="width:35px"><input type="checkbox" class="i-checks check_all"
+                                                                      name="ids[]"/>
+                                        </th>
+                                        <th>{{ trans("pages::pages.attributes.title") }}</th>
+                                        <th>{{ trans("pages::pages.attributes.created_at") }}</th>
+                                        <th>{{ trans("pages::pages.user") }}</th>
+                                        <th>{{ trans("pages::pages.tags") }}</th>
+                                        <th>{{ trans("pages::pages.attributes.status") }}</th>
+                                        <th>{{ trans("pages::pages.actions") }}</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    @foreach ($pages as $page)
+                                        <tr>
+                                            <td>
+                                                <input type="checkbox" class="i-checks" name="id[]"
+                                                       value="{{ $page->id }}"/>
+                                            </td>
 
-                                    <td class="center">
-                                        <a data-toggle="tooltip" data-placement="bottom"
-                                           title="{{ trans("pages::pages.edit") }}"
-                                           href="{{ route("admin.pages.edit", array("id" => $page->id)) }}">
-                                            <i class="fa fa-pencil text-navy"></i>
-                                        </a>
-                                        <a data-toggle="tooltip" data-placement="bottom"
-                                           title="{{ trans("pages::pages.delete") }}" class="delete_user ask"
-                                           message="{{ trans("pages::pages.sure_delete") }}"
-                                           href="{{ URL::route("admin.pages.delete", array("id" => $page->id)) }}">
-                                            <i class="fa fa-times text-navy"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-12 text-center">
-                                {{ trans("pages::pages.page") }}
-                                {{ $pages->currentPage() }}
-                                {{ trans("pages::pages.of") }}
-                                {{ $pages->lastPage() }}
+                                            <td>
+                                                <a data-toggle="tooltip" data-placement="bottom"
+                                                   title="{{ trans("pages::pages.edit") }}" class="text-navy"
+                                                   href="{{ route("admin.pages.edit", array("id" => $page->id)) }}">
+                                                    <strong>{{ $page->title }}</strong>
+                                                </a>
+
+                                            </td>
+                                            <td>
+                                                <small>{{ $page->created_at->render() }}</small>
+                                            </td>
+                                            <td>
+                                                <a href="?user_id={{ @$page->user->id }}" class="text-navy">
+                                                    <small> {{ @$page->user->first_name }}</small>
+                                                </a>
+                                            </td>
+
+                                            <td>
+                                                @if(count($page->tags))
+                                                    @foreach ($page->tags as $tag)
+                                                        <a href="?tag_id={{ $tag->id }}" class="text-navy">
+                                                            <span class="badge badge-primary">{{ $tag->name }}</span>
+                                                        </a>
+                                                    @endforeach
+                                                @else
+                                                    -
+                                                @endif
+                                            </td>
+                                            <td>
+                                                @if ($page->status)
+                                                    <a data-toggle="tooltip" data-placement="bottom"
+                                                       title="{{ trans("pages::pages.activated") }}" class="ask"
+                                                       message="{{ trans('pages::pages.sure_deactivate') }}"
+                                                       href="{{ URL::route("admin.pages.status", array("id" => $page->id, "status" => 0)) }}">
+                                                        <i class="fa fa-toggle-on text-success"></i>
+                                                    </a>
+                                                @else
+                                                    <a data-toggle="tooltip" data-placement="bottom"
+                                                       title="{{ trans("pages::pages.deactivated") }}" class="ask"
+                                                       message="{{ trans('pages::pages.sure_activate') }}"
+                                                       href="{{ URL::route("admin.pages.status", array("id" => $page->id, "status" => 1)) }}">
+                                                        <i class="fa fa-toggle-off text-danger"></i>
+                                                    </a>
+                                                @endif
+                                            </td>
+
+                                            <td class="center">
+                                                <a data-toggle="tooltip" data-placement="bottom"
+                                                   title="{{ trans("pages::pages.edit") }}"
+                                                   href="{{ route("admin.pages.edit", array("id" => $page->id)) }}">
+                                                    <i class="fa fa-pencil text-navy"></i>
+                                                </a>
+                                                <a data-toggle="tooltip" data-placement="bottom"
+                                                   title="{{ trans("pages::pages.delete") }}" class="delete_user ask"
+                                                   message="{{ trans("pages::pages.sure_delete") }}"
+                                                   href="{{ URL::route("admin.pages.delete", array("id" => $page->id)) }}">
+                                                    <i class="fa fa-times text-navy"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                    </tbody>
+                                </table>
                             </div>
-                            <div class="col-lg-12 text-center">
-                                {{ $pages->appends(Request::all())->render() }}
+                            <div class="row">
+                                <div class="col-lg-12 text-center">
+                                    {{ trans("pages::pages.page") }}
+                                    {{ $pages->currentPage() }}
+                                    {{ trans("pages::pages.of") }}
+                                    {{ $pages->lastPage() }}
+                                </div>
+                                <div class="col-lg-12 text-center">
+                                    {{ $pages->appends(Request::all())->render() }}
+                                </div>
                             </div>
-                        </div>
                         @else
                             {{ trans("pages::pages.no_records") }}
                         @endif

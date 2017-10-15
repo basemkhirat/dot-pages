@@ -3,10 +3,10 @@
 namespace Dot\Pages\Models;
 
 use Dot\Media\Models\Media;
+use Dot\Pages\Scopes\Page as PageScope;
 use Dot\Platform\Model;
 use Dot\Tags\Models\Tag;
 use Dot\Users\Models\User;
-use Dot\Pages\Scopes\Page as PageScope;
 
 /**
  * Class Page
@@ -16,6 +16,10 @@ class Page extends Model
 {
 
     /**
+     * @var bool
+     */
+    public $timestamps = true;
+    /**
      * @var string
      */
     protected $table = 'pages';
@@ -23,11 +27,6 @@ class Page extends Model
      * @var string
      */
     protected $primaryKey = 'id';
-    /**
-     * @var bool
-     */
-    public $timestamps = true;
-
     /**
      * @var array
      */
@@ -59,6 +58,18 @@ class Page extends Model
     ];
 
     /**
+     * The "booting" method of the model.
+     *
+     * @return void
+     */
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::addGlobalScope(new PageScope);
+    }
+
+    /**
      * Image relation
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
@@ -77,15 +88,6 @@ class Page extends Model
     }
 
     /**
-     * Tags relation
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
-    public function tags()
-    {
-        return $this->belongsToMany(Tag::class, "pages_tags", "page_id", "tag_id");
-    }
-
-    /**
      * Sync tags
      * @param $tags
      */
@@ -100,15 +102,12 @@ class Page extends Model
     }
 
     /**
-     * The "booting" method of the model.
-     *
-     * @return void
+     * Tags relation
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    protected static function boot()
+    public function tags()
     {
-        parent::boot();
-
-        static::addGlobalScope(new PageScope);
+        return $this->belongsToMany(Tag::class, "pages_tags", "page_id", "tag_id");
     }
 
 }

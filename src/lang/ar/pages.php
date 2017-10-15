@@ -1,6 +1,6 @@
 <?php
 return [
-    
+
     'pages' => 'الصفحات',
     'page' => 'صفحة',
     'add_new' => 'أضف جديد',
@@ -22,7 +22,7 @@ return [
     'desc' => 'تنازلى',
     'actions' => 'تعديل',
     'filter' => 'عرض',
-    
+
     'page_status' => 'حالة الصفحة',
     'activate' => 'تفعيل',
     'activated' => 'مفعل',
@@ -32,7 +32,7 @@ return [
     'sure_activate' => "هل تريد تفعيل الصفحة؟",
     'sure_deactivate' => "هل تريد إلغاء تفعيل الصفحة",
     'sure_delete' => 'هل تريد حذف الصفحة؟',
-    
+
     'add_image' => 'أضف صورة',
     'change_image' => 'تغيير الصورة',
     'not_allowed_file' => 'File is not allowed',
@@ -41,7 +41,7 @@ return [
     'add_tag' => 'أضف وسوم',
     'templates' => 'القوالب',
     'attributes' => [
-        
+
         'title' => 'العنوان',
         'slug' => "الإسم اللطيف",
         'excerpt' => 'المقتطف',
@@ -63,5 +63,5 @@ return [
     "permissions" => [
         "manage" => "التحكم بالصفحات"
     ]
-    
+
 ];

@@ -27,8 +27,8 @@
             <div class="col-lg-8 col-md-6 col-sm-6 col-xs-12 text-right">
 
                 @if ($page->id)
-                <a href="{{ route("admin.pages.create") }}" class="btn btn-primary btn-labeled btn-main"> <span
-                        class="btn-label icon fa fa-plus"></span>  {{ trans("pages::pages.add_new") }}</a>
+                    <a href="{{ route("admin.pages.create") }}" class="btn btn-primary btn-labeled btn-main"> <span
+                            class="btn-label icon fa fa-plus"></span> {{ trans("pages::pages.add_new") }}</a>
                 @endif
 
                 <button type="submit" class="btn btn-flat btn-danger btn-main">
@@ -83,7 +83,8 @@
                                 <label class="col-sm-9 control-label"
                                        for="input-status">{{ trans("pages::pages.attributes.status") }}</label>
                                 <div class="col-sm-3">
-                                    <input @if (@Request::old("status", $page->status)) checked="checked" @endif type="checkbox" id="input-status" name="status" value="1"
+                                    <input @if (@Request::old("status", $page->status)) checked="checked"
+                                           @endif type="checkbox" id="input-status" name="status" value="1"
                                            class="status-switcher switcher-sm">
                                 </div>
                             </div>

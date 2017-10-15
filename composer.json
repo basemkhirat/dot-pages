@@ -1,23 +1,21 @@
 {
-
     "name": "dot/pages",
-
-    "description": "The pages module of dot/cms",
-
-    "keywords": ["dotcms", "framework", "laravel", "cms", "modules", "plugins"],
-
+    "description": "The pages plugin of dot/platform",
+    "keywords": [
+        "framework",
+        "laravel",
+        "cms",
+        "plugins",
+        "platform",
+        "dot",
+        "pages"
+    ],
     "license": "MIT",
-
     "type": "package",
-
     "require": {
         "dot/platform": "0.4.*",
-        "dot/media": "dev-master",
-        "dot/users": "dev-master",
-        "dot/tags": "dev-master",
-        "dot/auth": "dev-master"
+        "dot/tags": "dev-master"
     },
-
     "autoload": {
         "psr-4": {
             "Dot\\Pages\\": "src"
