@@ -135,12 +135,12 @@
 
 @stop
 
-@push("header")
+@section("head")
     <link href="{{ assets("admin::tagit") }}/jquery.tagit.css" rel="stylesheet" type="text/css">
     <link href="{{ assets("admin::tagit") }}/tagit.ui-zendesk.css" rel="stylesheet" type="text/css">
-@endpush
+@stop
 
-@push("footer")
+@section("footer")
 
     <script type="text/javascript" src="{{ assets("admin::tagit") }}/tag-it.js"></script>
     <script type="text/javascript" src="{{ assets('admin::ckeditor/ckeditor.js') }}"></script>
@@ -258,6 +258,6 @@
 
     </script>
 
-@endpush
+@stop
 
 
