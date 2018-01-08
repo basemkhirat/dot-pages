@@ -14,7 +14,7 @@
     "type": "package",
     "require": {
         "dot/platform": "0.4.*",
-        "dot/tags": "dev-master"
+        "dot/tags": "*"
     },
     "autoload": {
         "psr-4": {
