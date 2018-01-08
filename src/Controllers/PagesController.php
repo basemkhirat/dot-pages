@@ -3,7 +3,7 @@
 namespace Dot\Pages\Controllers;
 
 use Action;
-use Dot\Auth\Models\Auth;
+use Illuminate\Support\Facades\Auth;
 use Dot\Pages\Models\Page;
 use Dot\Platform\Controller;
 use Redirect;
