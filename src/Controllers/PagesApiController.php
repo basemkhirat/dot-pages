@@ -6,13 +6,13 @@ use Dot\Pages\Models\Page;
 use Dot\Platform\APIController;
 use Illuminate\Http\Request;
 
-/**
+/*
  * Class PagesApiController
  */
 class PagesApiController extends APIController
 {
 
-    /**
+    /*
      * PagesApiController constructor.
      */
     function __construct(Request $request)
@@ -21,7 +21,7 @@ class PagesApiController extends APIController
         $this->middleware("permission:pages.manage");
     }
 
-    /**
+    /*
      * List pages
      * @param int $id (optional) The object identifier.
      * @param string $lang (default: user locale) The lang code.
@@ -71,7 +71,7 @@ class PagesApiController extends APIController
     }
 
 
-    /**
+    /*
      * Create a new page
      * @param string $title (required) The page title.
      * @param string $content (optional) The page content.
@@ -124,7 +124,7 @@ class PagesApiController extends APIController
 
     }
 
-    /**
+    /*
      * Update page by id
      * @param int $id (required) The user id.
      * @param string $title (optional) The page title.
@@ -169,7 +169,7 @@ class PagesApiController extends APIController
 
     }
 
-    /**
+    /*
      * Delete page by id
      * @param int $id (required) The page id.
      * @return \Illuminate\Http\JsonResponse
