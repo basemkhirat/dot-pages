@@ -8,56 +8,56 @@ use Dot\Platform\Model;
 use Dot\Tags\Models\Tag;
 use Dot\Users\Models\User;
 
-/*
+/**
  * Class Page
  * @package Dot\Pages\Models
  */
 class Page extends Model
 {
 
-    /*
+    /**
      * @var bool
      */
     public $timestamps = true;
-    /*
+    /**
      * @var string
      */
     protected $table = 'pages';
-    /*
+    /**
      * @var string
      */
     protected $primaryKey = 'id';
-    /*
+    /**
      * @var array
      */
     protected $searchable = ['title', 'excerpt', 'content'];
-    /*
+    /**
      * @var int
      */
     protected $perPage = 20;
 
-    /*
+    /**
      * @var array
      */
     protected $sluggable = [
         'slug' => 'title',
     ];
 
-    /*
+    /**
      * @var array
      */
     protected $creatingRules = [
         'title' => 'required'
     ];
 
-    /*
+    /**
      * @var array
      */
     protected $updatingRules = [
         'title' => 'required'
     ];
 
-    /*
+    /**
      * The "booting" method of the model.
      *
      * @return void
@@ -69,7 +69,7 @@ class Page extends Model
         static::addGlobalScope(new PageScope);
     }
 
-    /*
+    /**
      * Image relation
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
@@ -78,7 +78,7 @@ class Page extends Model
         return $this->hasOne(Media::class, "id", "image_id");
     }
 
-    /*
+    /**
      * User relation
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
@@ -87,7 +87,7 @@ class Page extends Model
         return $this->hasOne(User::class, "id", "user_id");
     }
 
-    /*
+    /**
      * Sync tags
      * @param $tags
      */
@@ -101,7 +101,7 @@ class Page extends Model
         $this->tags()->sync($tag_ids);
     }
 
-    /*
+    /**
      * Tags relation
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */

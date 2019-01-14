@@ -3,27 +3,27 @@
 namespace Dot\Pages\Controllers;
 
 use Action;
-use Illuminate\Support\Facades\Auth;
+use Dot\Auth\Models\Auth;
 use Dot\Pages\Models\Page;
 use Dot\Platform\Controller;
 use Redirect;
 use Request;
 use View;
 
-/*
+/**
  * Class PagesController
  * @package Dot\Pages\Controllers
  */
 class PagesController extends Controller
 {
 
-    /*
+    /**
      * View payload
      * @var array
      */
     protected $data = [];
 
-    /*
+    /**
      * Show all pages
      * @return mixed
      */
@@ -73,7 +73,7 @@ class PagesController extends Controller
         return View::make("pages::show", $this->data);
     }
 
-    /*
+    /**
      * Delete page by id
      * @return mixed
      */
@@ -102,7 +102,7 @@ class PagesController extends Controller
         return Redirect::back()->with("message", trans("pages::pages.events.deleted"));
     }
 
-    /*
+    /**
      * Activating / Deactivating page by id
      * @param $status
      * @return mixed
@@ -138,7 +138,7 @@ class PagesController extends Controller
         return Redirect::back()->with("message", $message);
     }
 
-    /*
+    /**
      * Create a new page
      * @return mixed
      */
@@ -183,7 +183,7 @@ class PagesController extends Controller
         return View::make("pages::edit", $this->data);
     }
 
-    /*
+    /**
      * Edit page by id
      * @param $id
      * @return mixed

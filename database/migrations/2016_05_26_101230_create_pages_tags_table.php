@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreatePagesTagsTable extends Migration
 {
-    /*
+    /**
      * Run the migrations.
      *
      * @return void
@@ -18,7 +18,7 @@ class CreatePagesTagsTable extends Migration
 
     }
 
-    /*
+    /**
      * Reverse the migrations.
      *
      * @return void
