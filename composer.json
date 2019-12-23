@@ -13,8 +13,8 @@
     "license": "MIT",
     "type": "package",
     "require": {
-        "dot/platform": "0.4.*",
-        "dot/tags": "dev-master"
+        "dot/platform": "0.5.*",
+        "dot/tags": "*"
     },
     "autoload": {
         "psr-4": {
