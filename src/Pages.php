@@ -9,6 +9,13 @@ use URL;
 class Pages extends \Dot\Platform\Plugin
 {
 
+    /*
+     * @var array
+     */
+    protected $dependencies = [
+        "tags" => \Dot\Tags\Tags::class
+    ];
+
     protected $permissions = [
         "manage"
     ];
