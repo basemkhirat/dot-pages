@@ -1,5 +1,6 @@
 {
     "name": "dot/pages",
+    "version": "0.2.11",
     "description": "The pages plugin of dot/platform",
     "keywords": [
         "framework",
