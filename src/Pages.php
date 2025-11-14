@@ -4,7 +4,6 @@ namespace Dot\Pages;
 
 use Illuminate\Support\Facades\Auth;
 use Navigation;
-use URL;
 
 class Pages extends \Dot\Platform\Plugin
 {
