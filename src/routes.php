@@ -17,19 +17,3 @@ Route::group([
         $route->post('newSlug', 'PagesController@new_slug');
     });
 });
-
-/*
- * API
- */
-Route::group([
-    "prefix" => API,
-    "middleware" => ["auth:api"],
-    "namespace" => "Dot\\Pages\\Controllers"
-], function ($route) {
-    $route->get("/pages/show", "PagesApiController@show");
-    $route->post("/pages/create", "PagesApiController@create");
-    $route->post("/pages/update", "PagesApiController@update");
-    $route->post("/pages/destroy", "PagesApiController@destroy");
-});
-
-
